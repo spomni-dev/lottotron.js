@@ -9,6 +9,11 @@
   */
   function Lottotron(){
   
+    /** @property {number} maxNumber - Верхняя граница диапазона.
+      * @public
+      * @protected
+      */
+  
     /** @property {array} restNumbers - Массив чисел диапазона, которые не были возвращены методом getNumber.
       * @public
       * @protected

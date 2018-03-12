@@ -5,6 +5,11 @@
     //-- Should round to down the param "maxNumber" if it's a float number.
     //-- Should return "undefined" if the input param "maxNumber" is number and it isn't less than 0.
   /* Check instance of the class "Lottotron" */
+    /* Check the property "maxNumber"*/
+      //-- Should be number
+      //-- Should be not less than 0
+      //-- Должно быть целым числом
+      //-- Не должно изменяться извне.
     /* Check the method "getNumber" */
       //-- Вызовы метода "getNumber", в кол-ве (maxNumber+1), должны вернуть все числа диапазона.
       //-- Вызовы метода "getNumber", с пррядковыми номерами свыше (maxNumber+1), должны возвращать null.
