@@ -3,7 +3,7 @@
     //-- Should return an "Error" object if the input param "maxNumber" isn't number.
     //-- Should return an "Error" object if the input param "maxNumber" is less than 0.
     //-- Should round to down the param "maxNumber" if it's a float number.
-    //-- Should return "undefined" if the input param "maxNumber" is number and it isn't less than 0.
+    //-- Should return an object instance of "Lottotron" if the input param "maxNumber" is number and it isn't less than 0.
   /* Check instance of the class "Lottotron" */
     /* Check the property "maxNumber"*/
       //-- Should be number
