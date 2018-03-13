@@ -1,1 +1,2 @@
 ✔ #b0 Found a wrong assert on line 6 in the test plan's file.
+✔ #b1 The property "restNumbers" change its value when returned array is change.
