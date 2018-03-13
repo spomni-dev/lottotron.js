@@ -9,7 +9,7 @@
       //-- Should be number
       //-- Should be not less than 0
       //-- Должно быть целым числом
-      //-- Не должно изменяться извне.
+      //-- Не должно изменяться присваиванием.
     /* Check the method "getNumber" */
       //-- Вызовы метода "getNumber", в кол-ве (maxNumber+1), должны вернуть все числа диапазона.
       //-- Вызовы метода "getNumber", с пррядковыми номерами свыше (maxNumber+1), должны возвращать null.
@@ -18,7 +18,8 @@
       //-- Should be an array
       //-- Should not contain numbers that was returned from the method "getNumber".
       //-- Should return an empty array if all numbers from the interval was returned from the method "getNumber".
-      //-- Не должно изменяться извне.
+      //-- Не должно изменяться присваиванием.
+      //-- Не должно изменяться при изменении возвращенного значения.
     /* Check the method "reload" */
       //-- The property "restNumbers" should contain all numbers of the interval.
       //-- Вызовы метода "getNumber", в кол-ве (maxNumber+1), должны вернуть все числа диапазона.
