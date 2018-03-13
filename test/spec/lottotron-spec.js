@@ -33,6 +33,18 @@ describe( 'lottotron.js', function(){
   function isNumber( param ){
     return ( typeof( param ) == "number" );
   }
+  
+  function isEqualArrays( array1, array2 ){
+    if ( array1.length !== array2.length ){
+      return false;
+    }
+    for (var i=0; i<array1.length; i++){
+      if ( array1[i] !== array2[i] ){
+        return false;
+      }
+    }
+    return true;
+  }
 
   describe('Check the constructor "Lottotron"', function(){
   
@@ -83,6 +95,57 @@ describe( 'lottotron.js', function(){
         var lotto = new Lottotron( 3 );
         lotto.maxNumber = 7;
         assert.equal( lotto.maxNumber, 3 );
+      });
+      
+    });
+    
+    describe( 'Check the method "getNumber"', function(){
+    
+      it( 'Вызовы метода "getNumber", в кол-ве (maxNumber+1), должны вернуть все числа диапазона.', function(){
+        
+        var maxNumber = 4;
+        var lotto = new Lottotron( maxNumber );
+        var returnedNumbers = [];
+
+        for (var i=0; i<=maxNumber; i++){
+          returnedNumbers.push( lotto.getNumber() );
+        }
+
+        for (var i=0; i<=maxNumber; i++){
+          assert.include( returnedNumbers, i );
+        }
+        
+      });
+      
+      it( 'Вызовы метода "getNumber", с пoрядковыми номерами свыше (maxNumber+1), должны возвращать null.', function(){
+        
+        var maxNumber = 4;
+        var lotto = new Lottotron( maxNumber );
+        
+        for (var i=0; i<=maxNumber; i++){
+          lotto.getNumber();
+        }
+        
+        assert.isNull( lotto.getNumber() );
+        assert.isNull( lotto.getNumber() );
+        
+      });
+      
+      it( 'Последовательности чисел, выданных разными экземплярами класса с равными диапазонами, должны отличаться.', function(){
+        
+        var maxNumber = 19;
+        var lotto1 = new Lottotron( maxNumber );
+        var lotto2 = new Lottotron( maxNumber );
+        var array1 = [];
+        var array2 = [];
+        
+        for (var i=0; i<=maxNumber; i++){
+          array1.push( lotto1.getNumber() );
+          array2.push( lotto2.getNumber() );
+        }
+        
+        assert( !isEqualArrays( array1, array2 ) );
+        
       });
       
     });
