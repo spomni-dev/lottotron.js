@@ -53,6 +53,11 @@ describe( 'lottotron.js', function(){
       assert.instanceOf( lotto, Lottotron );
     });
     
+    it( 'Should round to down the param "maxNumber" if it is a float number.', function(){
+      var lotto = new Lottotron( 4.7 );
+      assert.strictEqual( lotto.maxNumber, 4);
+    });
+    
   });
 
 });

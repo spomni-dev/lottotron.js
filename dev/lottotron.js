@@ -9,7 +9,7 @@
   */
   function Lottotron( maxNumber ){
   
-    //-- Check input param
+    //-- Check and init input param
       if ( typeof(maxNumber) != 'number' ){
         return new Error('The input option "maxNumber" should be a number.');
       } else if ( maxNumber < 0 ){
@@ -20,6 +20,8 @@
       * @public
       * @protected
       */
+      var _maxNumber = Math.floor( maxNumber );
+      this.maxNumber = _maxNumber;
   
     /** @property {array} restNumbers - Массив чисел диапазона, которые не были возвращены методом getNumber.
       * @public
