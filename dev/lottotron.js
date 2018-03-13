@@ -21,7 +21,11 @@
       * @protected
       */
       var _maxNumber = Math.floor( maxNumber );
-      this.maxNumber = _maxNumber;
+      Object.defineProperty( this, 'maxNumber', {
+        get : function(){
+          return _maxNumber;
+        }
+      });
   
     /** @property {array} restNumbers - Массив чисел диапазона, которые не были возвращены методом getNumber.
       * @public

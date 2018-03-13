@@ -59,5 +59,34 @@ describe( 'lottotron.js', function(){
     });
     
   });
+  
+  describe( 'Check instance of the class "Lottotron"', function(){
+  
+    describe( 'Check the property "maxNumber"',function(){
+    
+      it( 'Should be number', function(){
+        var lotto = new Lottotron( 8.3 );
+        assert.isNumber( lotto.maxNumber );
+      });
+      
+      it( 'Should be not less than 0', function(){
+        var lotto = new Lottotron( 5.7 );
+        assert( !(lotto.maxNumber < 0) );
+      });
+      
+      it( 'Should be integer', function(){
+        var lotto = new Lottotron( 3.2 );
+        assert( (lotto.maxNumber % 1 == 0) );
+      });
+      
+      it( 'Should not be changed', function(){
+        var lotto = new Lottotron( 3 );
+        lotto.maxNumber = 7;
+        assert.equal( lotto.maxNumber, 3 );
+      });
+      
+    });
+    
+  });
 
 });
