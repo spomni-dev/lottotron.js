@@ -12,10 +12,11 @@
       //-- Не должно изменяться присваиванием.
     /* Check the method "getNumber" */
       //-- Вызовы метода "getNumber", в кол-ве (maxNumber+1), должны вернуть все числа диапазона.
-      //-- Вызовы метода "getNumber", с пррядковыми номерами свыше (maxNumber+1), должны возвращать null.
+      //-- Вызовы метода "getNumber", с пoрядковыми номерами свыше (maxNumber+1), должны возвращать null.
       //-- Последовательности чисел, выданных разными экземплярами класса с равными диапазонами, должны отличаться.
     /* Check the property "restNumbers" */
       //-- Should be an array
+      //-- Should contain all numbers of the interval that were not returned from the method "getNumber".
       //-- Should not contain numbers that was returned from the method "getNumber".
       //-- Should return an empty array if all numbers from the interval was returned from the method "getNumber".
       //-- Не должно изменяться присваиванием.
