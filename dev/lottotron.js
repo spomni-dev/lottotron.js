@@ -38,6 +38,11 @@
       * @public
       * @protected
       */
+      Object.defineProperty( this, 'restNumbers', {
+        get : function(){
+          return cloneArray( _restNumbers );
+        }
+      });
     
     /** @method getNumber Возвращает следующее случайное число диапазона.
       * @public
@@ -89,5 +94,17 @@
         rand = Math.floor(rand);
         return rand;
       }
-    
+      
+    /** @function cloneArray return a clone of the array 
+      * @param {array} array
+      * @returns {array}
+      */
+      function cloneArray( array ){
+        var res = [];
+        array.forEach(function(value, i, array){
+          res.push( value );
+        });
+        return res;
+      }
+      
   }

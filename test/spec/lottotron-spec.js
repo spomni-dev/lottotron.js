@@ -1,50 +1,68 @@
 describe( 'lottotron.js', function(){
 
   /** @namespace itWrappers */
-  var itWr, itWrappers;
-  itWr = itWrappers = {
+    var itWr, itWrappers;
+    itWr = itWrappers = {
   
-    /** @function forEachType Вызывает функцию callback для каждого из стандартных типов данных.
-      * @describe Вызывает функцию callback для каждого из стандартных типов данных. В параметр type передает экщемпляр соответствующего типа данеых.
-      * @param {Function} callback( type )
-      */
-    forEachType : function( callback ){
+      /** @function forEachType Вызывает функцию callback для каждого из стандартных типов данных.
+        * @describe Вызывает функцию callback для каждого из стандартных типов данных. В параметр type передает экземпляр соответствующего типа данеых.
+        * @param {Function} callback( type )
+        * @returns {undefined}
+        */
+        forEachType : function( callback ){
     
-      var typeArr = [
-        1,
-        "string",
-        null,
-        undefined,
-        [],
-        {}
-      ]
+          var typeArr = [
+            1,
+            "string",
+            null,
+            undefined,
+            [],
+            {}
+          ]
       
-      var res = function(){
-        typeArr.forEach(function(type, i, typeArr){
-          callback( type );
-        });
-      }
+          var res = function(){
+            typeArr.forEach(function(type, i, typeArr){
+              callback( type );
+            });
+          }
       
-      return res;
+          return res;
+        }
+      //
+    } // itWrapper
+
+  /** @function isNull 
+    * @param {mixed} value
+    * @returns {boolean}
+    */
+    function isNumber( param ){
+      return ( typeof( param ) == "number" );
     }
-    
-  } // itWrapper
   
-  function isNumber( param ){
-    return ( typeof( param ) == "number" );
-  }
-  
-  function isEqualArrays( array1, array2 ){
-    if ( array1.length !== array2.length ){
-      return false;
+  /** @function isNull 
+    * @param {mixed} value
+    * @returns {boolean}
+    */
+    function isNull( value ){
+      return value === null;
     }
-    for (var i=0; i<array1.length; i++){
-      if ( array1[i] !== array2[i] ){
+  
+  /** @function isEqualArrays 
+    * @param {array} array1
+    * @param {array} array2
+    * @returns {boolean}
+    */
+    function isEqualArrays( array1, array2 ){
+      if ( array1.length !== array2.length ){
         return false;
       }
+      for (var i=0; i<array1.length; i++){
+        if ( array1[i] !== array2[i] ){
+        return false;
+        }
+      }
+      return true;
     }
-    return true;
-  }
 
   describe('Check the constructor "Lottotron"', function(){
   
@@ -145,6 +163,89 @@ describe( 'lottotron.js', function(){
         }
         
         assert( !isEqualArrays( array1, array2 ) );
+        
+      });
+      
+    });
+    
+    /* Check the property "restNumbers" */
+    describe( 'Check the property "restNumbers"', function(){
+    
+      it( 'Should be an array', function(){
+        var lotto = new Lottotron(4);
+        assert.isArray( lotto.restNumbers );
+      });
+      
+      it( 'Should contain all numbers of the interval that were not returned from the method "getNumber".', function(){
+      
+        var maxNumber = 6;
+        var lotto = new Lottotron(maxNumber);
+        
+        var dontReturned = [];
+        for (var i=0; i<=maxNumber; i++){
+          dontReturned.push(i);
+        }
+        
+        for (var i=0; i<=maxNumber; i++){
+          var number = lotto.getNumber();
+          
+          for (var key in dontReturned){
+            if (dontReturned[key] === number){
+              dontReturned.splice(key, 1);
+            }
+          }
+
+          dontReturned.forEach(function(number, i, dontReturned){
+            assert.include( lotto.restNumbers, number );
+          });
+        }
+        
+      });
+      
+      it( 'Should not contain numbers that was returned from the method "getNumber".', function(){
+        
+        var maxNumber = 9;
+        var lotto = new Lottotron(maxNumber);
+        var returnedNumbers = [];
+        
+        for (var i=0; i<=maxNumber; i++){
+          returnedNumbers.push( lotto.getNumber() );
+          var restNumbers = lotto.restNumbers;
+          
+          returnedNumbers.forEach(function(number, i, returnedNumbers){
+            assert.notInclude( restNumbers, number );
+          });
+        }
+      });
+      
+      it( 'Should return an empty array if all numbers from the interval was returned from the method "getNumber".', function(){
+        
+        var lotto = new Lottotron(7);
+
+        while( !isNull( lotto.getNumber() ) ){
+          'smile please';
+        };
+        
+        assert.isArray( lotto.restNumbers );
+        assert.strictEqual( lotto.restNumbers.length, 0 );
+
+      });
+      
+      it( 'Не должно изменяться присваиванием.', function(){
+        var lotto = new Lottotron(4);
+
+        lotto.restNumbers = [1,3];
+        
+        assert( isEqualArrays( [0,1,2,3,4], lotto.restNumbers ) );
+      });
+
+      it( 'Не должно изменяться при изменении возвращенного значения.', function(){
+        var lotto = new Lottotron(3);
+        
+        var value = lotto.restNumbers;
+        value.push(98);
+        
+        assert( isEqualArrays( [0,1,2,3], lotto.restNumbers ) );
         
       });
       
