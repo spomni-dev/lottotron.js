@@ -5,7 +5,7 @@
   *
   * @param {number} maxNumber - Верхняя граница диапазона. Число должно быть больше либо равно нулю. Дробные значения будут округлены до целого в меньшую сторону.
   *
-  * @returns {Lottotron}
+  * @returns {Lottotron|Error}
   */
   function Lottotron(){
   

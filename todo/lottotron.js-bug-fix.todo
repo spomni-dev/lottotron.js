@@ -1,3 +1,4 @@
 ✔ #b0 Found a wrong assert on line 6 in the test plan's file.
 ✔ #b1 The property "restNumbers" change its value when returned array is change.
 ✔ #b2 The test plan don't contain an assert 'The property "restNumbers" should contain all numbers of the interval that were not returned from the method "getNumber"'
+✔ #b3 The external interface does not contain information about the return of the "Error" object.
