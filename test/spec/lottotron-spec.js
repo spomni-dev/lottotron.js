@@ -46,6 +46,23 @@ describe( 'lottotron.js', function(){
     function isNull( value ){
       return value === null;
     }
+    
+  /** @function doesArrayInclude Check the inclusion of the value in the array.
+    * @desc Check the inclusion of the value in the array. Return "true" if the value is encluded else return "false".
+    *
+    * @param {array} array
+    * @param {mixed} value
+    *
+    * @returns {boolean}
+    */
+    function doesArrayInclude( array, value ){
+      var res = false;
+      array.forEach(function(arrayValue, i, array){
+        if ( arrayValue === value ) 
+          res = true;
+      });
+      return res;
+    }
   
   /** @function isEqualArrays 
     * @param {array} array1
@@ -246,6 +263,62 @@ describe( 'lottotron.js', function(){
         value.push(98);
         
         assert( isEqualArrays( [0,1,2,3], lotto.restNumbers ) );
+        
+      });
+      
+    });
+    
+    describe( 'Check the method "reload"', function(){
+      it( 'The property "restNumbers" should contain all numbers of the interval.', function(){
+      
+        var maxNumber = 11;
+        var lotto = new Lottotron(maxNumber)
+        
+        var initalArray = [];
+        for (var i=0; i<=maxNumber; i++){
+          initalArray.push( i );
+        }
+        
+        for (var i=0; i<5; i++){
+          lotto.getNumber();
+        }
+        
+        lotto.reload();
+        
+        initalArray.forEach(function(number, i, initalArray){
+          assert.include( lotto.restNumbers, number );
+        });
+      });
+      
+      it( 'Вызовы метода "getNumber", в кол-ве (maxNumber+1), должны вернуть все числа диапазона.', function(){
+        
+        var maxNumber = 12;
+        var lotto = new Lottotron(maxNumber)
+        
+        var numbersArray = [];
+        for (var i=0; i<=maxNumber; i++){
+          numbersArray.push( i );
+        }
+        
+        for (var i=0; i<5; i++){
+          lotto.getNumber();
+        }
+        
+        lotto.reload();
+        
+        for(var i=0; i<=maxNumber; i++){
+          var number = lotto.getNumber();
+          console.log( numbersArray+'include'+number)
+          if( doesArrayInclude( numbersArray, number ) ){
+            numbersArray.forEach(function(value, index, numbersArray){
+              if ( value === number ){
+                numbersArray.splice(index, 1);
+              }
+            });
+          }
+        }
+        
+        assert.strictEqual( numbersArray.length, 0);
         
       });
       

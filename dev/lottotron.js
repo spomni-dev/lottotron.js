@@ -67,6 +67,11 @@
       *
       * @returns {undefined}
       */
+      this.reload = function(){
+        for (var i=0; i<=_maxNumber; i++){
+          _restNumbers[i] = i;
+        }
+      }
       
     /** @function createNumbersArray - return array filled of the integer numbers from 0 to maxNumber.
       *
