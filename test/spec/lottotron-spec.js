@@ -308,7 +308,7 @@ describe( 'lottotron.js', function(){
         
         for(var i=0; i<=maxNumber; i++){
           var number = lotto.getNumber();
-          console.log( numbersArray+'include'+number)
+
           if( doesArrayInclude( numbersArray, number ) ){
             numbersArray.forEach(function(value, index, numbersArray){
               if ( value === number ){

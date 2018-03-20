@@ -1,4 +1,4 @@
-/** @class Lottotron
+/** @constructor Lottotron
   *
   * @classdesc Создает объект, предназначенный для выдачи в произвольном порядке не повторяющихся натуральных чисел. Числа выдаются из диапазона от нуля до заданного пользователем значения включительно.
   *
@@ -17,124 +17,147 @@
     
     /** @member {number} _maxNumber - Верхняя граница диапазона.
       * @private
-      * @inner
+      * @instance
       *
       * @memberof Lottotron
       */
-      var _maxNumber = Math.floor( maxNumber );
+      this._maxNumber = Math.floor( maxNumber );
+      
     /** @member {number} maxNumber - Верхняя граница диапазона.
-      * @inner
+      * @instance
       * @readonly
+      *
       * @memberof Lottotron
       */
-      Object.defineProperty( this, 'maxNumber', {
-        get : function(){
-          return _maxNumber;
-        }
+      Object.defineProperty( Lottotron.prototype, 'maxNumber', {
+        get : this._getMaxNumber
       });
     
     /** @member {array} _restNumbers - Массив чисел диапазона, которые не были возвращены методом getNumber.
       * @private
-      * @inner
+      * @instance
       *
       * @memberof Lottotron
       */
-      var _restNumbers = createNumbersArray( _maxNumber );
+      this._restNumbers = this._createNumbersArray( this._maxNumber );
+
     /** @member {array} restNumbers - Массив чисел диапазона, которые не были возвращены методом getNumber.
-      * @inner
+      * @instance
       * @readonly
+      *
       * @memberof Lottotron
       */
-      Object.defineProperty( this, 'restNumbers', {
-        get : function(){
-          return cloneArray( _restNumbers );
-        }
+      Object.defineProperty( Lottotron.prototype, 'restNumbers', {
+        get : this._getRestNumbers
       });
+  };
+  
+  /** @method getNumber 
+    * @instance
+    *
+    * @desc Возвращает следующее случайное число диапазона. Возвращает null, если все числа диапазона были выданы ранее.
+    * 
+    * @returns {number|null}
+    *
+    * @memberof Lottotron
+    */
+  Lottotron.prototype.getNumber = function (){
+    if (this._restNumbers.length <= 0){
+      return null;
+    } else {
+      var numberIndx = this._randomInteger(0, this._restNumbers.length-1);
+      return this._restNumbers.splice(numberIndx, 1)[0];
+    }
+  };
+  
+  /** @method reload
+    * @instance
+    *
+    * @desc Очищает память выдачи. После вызова данного метода, метод getNumber не учитывает числа, выданные до текущего момента.
+    *
+    * @returns {undefined}
+    *
+    * @memberof Lottotron
+    */
+    Lottotron.prototype.reload = function(){
+      for (var i=0; i<=this._maxNumber; i++){
+        this._restNumbers[i] = i;
+      }
+    };
+  
+  /** Return value of the private var "maxNumber"
+    * @private
+    * @instance
+    * @memberof Lottotron
+    */
+  Lottotron.prototype._getMaxNumber = function(){
+    return this._maxNumber;
+  };
+  
+  /** Return a clone of the private array "restNumbers"
+    * @private
+    * @instance
+    * @memberof Lottotron
+    */
+  Lottotron.prototype._getRestNumbers = function(){
+    return this._cloneArray( this._restNumbers );
+  };
+  
+  /** Return a clone of the array 
+    *
+    * @param {array} array
+    *
+    * @returns {array}
+    *
+    * @private
+    * @memberof Lottotron
+    */
+  Lottotron.prototype._cloneArray = function( array ){
+    var res = [];
+    array.forEach(function(value, i, array){
+      res.push( value );
+    });
+    return res;
+  };
+  
+  /** Return random number from min to max
+    *
+    * @param {number} min
+    * @param {number} max
+    *
+    * @returns {number}
+    *
+    * @private
+    * @memberof Lottotron
+    */
+    Lottotron.prototype._randomInteger = function(min, max){
+      var rand = min + Math.random() * (max + 1 - min);
+      rand = Math.floor(rand);
+      return rand;
+    };
     
-    /** @method getNumber
-      *
-      * @desc Возвращает следующее случайное число диапазона. Возвращает null, если все числа диапазона были выданы ранее.
-      * 
-      * @returns {number|null}
-      *
-      * @inner
-      * @memberof Lottotron
-      */
-      this.getNumber = function (){
-        if (_restNumbers.length <= 0){
-          return null;
-        } else {
-          var numberIndx = randomInteger(0, _restNumbers.length-1);
-          return _restNumbers.splice(numberIndx, 1)[0];
-        }
+  /** Return array filled of the integer numbers from 0 to maxNumber.
+    *
+    * @param {number} maxNumber
+    *
+    * @returns {array}
+    *
+    * @private
+    * @memberof Lottotron
+    */
+    Lottotron.prototype._createNumbersArray = function( maxNumber ){
+      var res = [];
+      for ( var i=0; i<=maxNumber; i++ ){
+        res[i] = i;
       }
-      
-    /** @method reload
-      *
-      * @desc Очищает память выдачи. После вызова данного метода, метод getNumber не учитывает числа, выданные до текущего момента.
-      *
-      * @returns {undefined}
-      *
-      * @inner
-      * @memberof Lottotron
-      */
-      this.reload = function(){
-        for (var i=0; i<=_maxNumber; i++){
-          _restNumbers[i] = i;
-        }
-      }
-      
-    /** Return array filled of the integer numbers from 0 to maxNumber.
-      *
-      * @param {number} maxNumber
-      *
-      * @returns {array}
-      *
-      * @private
-      * @inner
-      * @memberof Lottotron
-      */
-      function createNumbersArray( maxNumber ){
-        var res = [];
-        for ( var i=0; i<=maxNumber; i++ ){
-          res[i] = i;
-        }
-        return res;
-      }
-      
-    /** Return random number from min to max
-      *
-      * @param {number} min
-      * @param {number} max
-      *
-      * @returns {number}
-      *
-      * @private
-      * @inner
-      * @memberof Lottotron
-      */
-      function randomInteger(min, max) {
-        var rand = min + Math.random() * (max + 1 - min);
-        rand = Math.floor(rand);
-        return rand;
-      }
-      
-    /** Return a clone of the array 
-      *
-      * @param {array} array
-      *
-      * @returns {array}
-      *
-      * @private
-      * @inner
-      * @memberof Lottotron
-      */
-      function cloneArray( array ){
-        var res = [];
-        array.forEach(function(value, i, array){
-          res.push( value );
+      return res;
+    };
+    
+  //-- Hide private methods
+    for ( var key in Lottotron.prototype ){
+      if ( key[0] === "_" ){
+        Object.defineProperty( Lottotron.prototype, key, {
+          "enumerable" : false
         });
-        return res;
-      }
-      
-  }
+      };
+    };

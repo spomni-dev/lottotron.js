@@ -7,3 +7,4 @@
 ✔ #6 Write README.md
 ☐ #7 Перевести тексты
 ✔ #8 Rewrite jsdoc
+✔ #9 Refactoring: move methods and properties into the prototype
