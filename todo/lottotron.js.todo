@@ -8,6 +8,6 @@
 ☐ #7 Перевести тексты
 ✔ #8 Rewrite jsdoc
 ✔ #9 Refactoring: move methods and properties into the prototype
-☐ #10 Remake tests
+✔ #10 Rewrite tests
 ☐ #11 Prepare realize_ru
 ☐ #12 Prepare realize_en

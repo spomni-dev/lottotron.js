@@ -81,7 +81,7 @@ describe( 'lottotron.js', function(){
       return true;
     }
 
-  describe('Check the constructor "Lottotron"', function(){
+  describe( 'new Lottotron( maxNumber )', function(){
   
     it( 'Should return an "Error" object if the input param "maxNumber" is not number.', itWr.forEachType(function( type ){
       if ( !isNumber( type ) ){
@@ -107,9 +107,9 @@ describe( 'lottotron.js', function(){
     
   });
   
-  describe( 'Check instance of the class "Lottotron"', function(){
+  describe( 'Lottotron', function(){
   
-    describe( 'Check the property "maxNumber"',function(){
+    describe( '#maxNumber',function(){
     
       it( 'Should be number', function(){
         var lotto = new Lottotron( 8.3 );
@@ -134,7 +134,7 @@ describe( 'lottotron.js', function(){
       
     });
     
-    describe( 'Check the method "getNumber"', function(){
+    describe( '#getNumber()', function(){
     
       it( 'Вызовы метода "getNumber", в кол-ве (maxNumber+1), должны вернуть все числа диапазона.', function(){
         
@@ -185,8 +185,7 @@ describe( 'lottotron.js', function(){
       
     });
     
-    /* Check the property "restNumbers" */
-    describe( 'Check the property "restNumbers"', function(){
+    describe( '#restNumbers', function(){
     
       it( 'Should be an array', function(){
         var lotto = new Lottotron(4);
@@ -268,7 +267,7 @@ describe( 'lottotron.js', function(){
       
     });
     
-    describe( 'Check the method "reload"', function(){
+    describe( '#reload()', function(){
       it( 'The property "restNumbers" should contain all numbers of the interval.', function(){
       
         var maxNumber = 11;
