@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: lottotron.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: lottotron.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** @constructor Lottotron
+  *
+  * @classdesc Создает объект, предназначенный для выдачи в произвольном порядке не повторяющихся натуральных чисел. Числа выдаются из диапазона от нуля до заданного пользователем значения включительно.
+  *
+  * @param {number} maxNumber - Верхняя граница диапазона. Число должно быть больше либо равно нулю. Дробные значения будут округлены до целого в меньшую сторону.
+  *
+  * @returns {Lottotron|Error}
+  */
+  function Lottotron( maxNumber ){
+  
+    //-- Пррверка и инициализация входного параметра
+      if ( typeof(maxNumber) != 'number' ){
+        return new Error('The input option "maxNumber" should be a number.');
+      } else if ( maxNumber &lt; 0 ){
+        return new Error('The input option "maxNumber" should be greater than 0.');
+      }
+    
+    /** @member {number} _maxNumber - Верхняя граница диапазона.
+      * @private
+      * @instance
+      *
+      * @memberof Lottotron
+      */
+      this._maxNumber = Math.floor( maxNumber );
+      
+    /** @member {number} maxNumber - Верхняя граница диапазона.
+      * @instance
+      * @readonly
+      *
+      * @memberof Lottotron
+      */
+      Object.defineProperty( Lottotron.prototype, 'maxNumber', {
+        get : this._getMaxNumber
+      });
+    
+    /** @member {array} _restNumbers - Массив чисел диапазона, которые не были возвращены методом getNumber.
+      * @private
+      * @instance
+      *
+      * @memberof Lottotron
+      */
+      this._restNumbers = this._createNumbersArray( this._maxNumber );
+
+    /** @member {array} restNumbers - Массив чисел диапазона, которые не были возвращены методом getNumber.
+      * @instance
+      * @readonly
+      *
+      * @memberof Lottotron
+      */
+      Object.defineProperty( Lottotron.prototype, 'restNumbers', {
+        get : this._getRestNumbers
+      });
+  };
+  
+  /** @method getNumber 
+    * @instance
+    *
+    * @desc Возвращает следующее случайное число диапазона. Возвращает null, если все числа диапазона были выданы ранее.
+    * 
+    * @returns {number|null}
+    *
+    * @memberof Lottotron
+    */
+  Lottotron.prototype.getNumber = function (){
+    if (this._restNumbers.length &lt;= 0){
+      return null;
+    } else {
+      var numberIndx = this._randomInteger(0, this._restNumbers.length-1);
+      return this._restNumbers.splice(numberIndx, 1)[0];
+    }
+  };
+  
+  /** @method reload
+    * @instance
+    *
+    * @desc Очищает память выдачи. После вызова данного метода, метод getNumber не учитывает числа, выданные до текущего момента.
+    *
+    * @returns {undefined}
+    *
+    * @memberof Lottotron
+    */
+    Lottotron.prototype.reload = function(){
+      for (var i=0; i&lt;=this._maxNumber; i++){
+        this._restNumbers[i] = i;
+      }
+    };
+  
+  /** Возвращает значение приватного поля "_maxNumber"
+    * @private
+    * @instance
+    * @memberof Lottotron
+    */
+  Lottotron.prototype._getMaxNumber = function(){
+    return this._maxNumber;
+  };
+  
+  /** Возвращает клон приватного массива "_restNumbers"
+    * @private
+    * @instance
+    * @memberof Lottotron
+    */
+  Lottotron.prototype._getRestNumbers = function(){
+    return this._cloneArray( this._restNumbers );
+  };
+  
+  /** Возвращает клон массива
+    *
+    * @param {array} array
+    *
+    * @returns {array}
+    *
+    * @private
+    * @memberof Lottotron
+    */
+  Lottotron.prototype._cloneArray = function( array ){
+    var res = [];
+    array.forEach(function(value, i, array){
+      res.push( value );
+    });
+    return res;
+  };
+  
+  /** Возвращает случайное целое число с "min" по "max".
+    *
+    * @param {number} min
+    * @param {number} max
+    *
+    * @returns {number}
+    *
+    * @private
+    * @memberof Lottotron
+    */
+    Lottotron.prototype._randomInteger = function(min, max){
+      var rand = min + Math.random() * (max + 1 - min);
+      rand = Math.floor(rand);
+      return rand;
+    };
+    
+  /** Возвращает массив, заполненный целыми числами с 0 по "maxNumber".
+    *
+    * @param {number} maxNumber
+    *
+    * @returns {array}
+    *
+    * @private
+    * @memberof Lottotron
+    */
+    Lottotron.prototype._createNumbersArray = function( maxNumber ){
+      var res = [];
+      for ( var i=0; i&lt;=maxNumber; i++ ){
+        res[i] = i;
+      }
+      return res;
+    };
+    
+  //-- Сокрытие приватных полей и методов
+    for ( var key in Lottotron.prototype ){
+      if ( key[0] === "_" ){
+        Object.defineProperty( Lottotron.prototype, key, {
+          "enumerable" : false
+        });
+      };
+    };</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Lottotron.html">Lottotron</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Mar 20 2018 15:33:25 GMT+0300 (MSK)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
