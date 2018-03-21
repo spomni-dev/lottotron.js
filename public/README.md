@@ -1,0 +1,1 @@
+# lottotron.js
