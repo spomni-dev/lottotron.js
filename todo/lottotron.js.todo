@@ -5,7 +5,7 @@
 ✔ #4 Develop a test plane
 ✔ #5 Write code of the tests and programm
 ✔ #6 Write README.md
-☐ #7 Перевести тексты
+✔ #7 Translate texts
 ✔ #8 Rewrite jsdoc
 ✔ #9 Refactoring: move methods and properties into the prototype
 ✔ #10 Rewrite tests

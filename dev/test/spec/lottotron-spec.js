@@ -126,7 +126,7 @@ describe( 'lottotron.js', function(){
         assert( (lotto.maxNumber % 1 == 0) );
       });
       
-      it( 'Should not be changed', function(){
+      it( 'Should be read-only.', function(){
         var lotto = new Lottotron( 3 );
         lotto.maxNumber = 7;
         assert.equal( lotto.maxNumber, 3 );
@@ -136,7 +136,7 @@ describe( 'lottotron.js', function(){
     
     describe( '#getNumber()', function(){
     
-      it( 'Вызовы метода "getNumber", в кол-ве (maxNumber+1), должны вернуть все числа диапазона.', function(){
+      it( 'The calls with numbers from 0 till "maxNumber" should return all numbers of the interval.', function(){
         
         var maxNumber = 4;
         var lotto = new Lottotron( maxNumber );
@@ -152,7 +152,7 @@ describe( 'lottotron.js', function(){
         
       });
       
-      it( 'Вызовы метода "getNumber", с пoрядковыми номерами свыше (maxNumber+1), должны возвращать null.', function(){
+      it( 'The next calls should return "null"', function(){
         
         var maxNumber = 4;
         var lotto = new Lottotron( maxNumber );
@@ -166,7 +166,7 @@ describe( 'lottotron.js', function(){
         
       });
       
-      it( 'Последовательности чисел, выданных разными экземплярами класса с равными диапазонами, должны отличаться.', function(){
+      it( 'The numbers sequences, returned from the different "Lottotron" instances, should not be equal.', function(){
         
         var maxNumber = 19;
         var lotto1 = new Lottotron( maxNumber );
@@ -247,7 +247,7 @@ describe( 'lottotron.js', function(){
 
       });
       
-      it( 'Не должно изменяться присваиванием.', function(){
+      it( 'Should be read-only.', function(){
         var lotto = new Lottotron(4);
 
         lotto.restNumbers = [1,3];
@@ -255,7 +255,7 @@ describe( 'lottotron.js', function(){
         assert( isEqualArrays( [0,1,2,3,4], lotto.restNumbers ) );
       });
 
-      it( 'Не должно изменяться при изменении возвращенного значения.', function(){
+      it( 'Should not change when the returb value has been changed.', function(){
         var lotto = new Lottotron(3);
         
         var value = lotto.restNumbers;
@@ -289,7 +289,7 @@ describe( 'lottotron.js', function(){
         });
       });
       
-      it( 'Вызовы метода "getNumber", в кол-ве (maxNumber+1), должны вернуть все числа диапазона.', function(){
+      it( 'The "#getNumber()" calls with numbers from 0 till "maxNumber" should return all numbers of the interval..', function(){
         
         var maxNumber = 12;
         var lotto = new Lottotron(maxNumber)

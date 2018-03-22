@@ -1,41 +1,40 @@
 # lottotron.js
 
-Конструктор класса для создания объекта, предназначенного для выдачи в произвольном порядке не повторяющихся натуральных чисел.
-Числа выдаются из диапазона от нуля до заданного пользователем значения включительно.
+The constructor *Lottotron* creates an object that can return random non-repeated integers.
+It returns integers from 0 to the user-defined value.
 
-## Как использовать
+## How to use
 
-Включите файл *lottotron.js* в ваш проект.
+Include the file "lottotron.js" into your project.
 
     <script type="text/javascript" src="js/lottotron.js"></script>
 
-Создайте экземпляр класса *Lottotron( maxNumber )*, указав в качестве парметра максимальное число диапазона. Число должно быть больше либо равно нулю.
+Create an instance of the class "Lottotron( maxNumber )" passing the max value as option. The number should be not less than 0.
 
     var lotto = new Lottotron( 9 );
     
-Чтобы получить следующее число, вызовите метод *getNumber()*.
+Call the method *#getNumber()* to get the next number.
 
     var number = lotto.getNumber();
     
-Вызов метода *getNumber()* возвращает очередное случайное число до тех пор, пока не будут возвращены все числа диапазона. Когда все числа выданы, метод возвращает `null`.
+The method *#getNumber()* returns the next number until all numbers of the inteval are returned. It returns ```null``` when all numbers have been returned.
 
-Чтобы иметь возможность вновь получать числа, воспользуйтесь методом *reload()*. Вызов данного метода приведет объект в состояние, идентичное тому, которое было сразу же после его создания.
+If you need to get numbers again use a method *#reload()*. It rallback an object to the inital state.
 
     lotto.reload();
     
-Узнать верхнюю границу диапазона можно обратившись к свойству *maxNumber*.
+The property *#maxNumber* contains the max number of the interval.
 
     var maxNumber = lotto.maxNumber;
      
-Если вам нужно знать, какие числа еще не были возвращены, обратитесь к массиву *restNumbers*.
+The prooerty *#restNumbers* contains all numbers that were not returned from method *#getNumber()*.
 
     var dontReturnedNumbersArray = lotto.restNumbers;
     
-## Обработка ошибок
+## Error processing
 
-Если, создавая экземпляр класса, в качестве параметра, вы передадите некорректное значение, функция вернет объект класса *Error*. Поле *message* возвращенного объекта бедет содердать описание ошибки.
+If you pass invalid value as an option of the constructor it returns an *Error* object. The its field *message* contains an error description.
 
 ***
 
-Больше информации вы можете получить, обратившись к документации.
-
+Look for additional information in the documentation.
