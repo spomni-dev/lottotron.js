@@ -1,14 +1,14 @@
-✔ #0 Select target
-✔ #1 Find solution
-✔ #2 Assign task
-✔ #3 Describe API
-✔ #4 Develop a test plane
-✔ #5 Write code of the tests and programm
-✔ #6 Write README.md
-✔ #7 Translate texts
-✔ #8 Rewrite jsdoc
-✔ #9 Refactoring: move methods and properties into the prototype
-✔ #10 Rewrite tests
-✔ #11 Prepare russian release
-☐ #12 Prepare english release
-✔ #13 Remake a folder structure
+✔ #0 Select target @done
+✔ #1 Find solution @done
+✔ #2 Assign task @done
+✔ #3 Describe API @done
+✔ #4 Develop a test plane @done
+✔ #5 Write code of the tests and programm @done
+✔ #6 Write README.md @done
+✔ #7 Translate texts @done
+✔ #8 Rewrite jsdoc @done
+✔ #9 Refactoring: move methods and properties into the prototype @done
+✔ #10 Rewrite tests @done
+✔ #11 Prepare russian release @done
+✔ #12 Prepare english release @done (2018-3-25 15:25:38)
+✔ #13 Remake a folder structure @done
